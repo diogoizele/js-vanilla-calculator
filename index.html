@@ -14,6 +14,17 @@
     <title>JS Vanilla Calculator</title>
   </head>
   <body>
+    <ul class="variables">
+      <li class="variables__title">Variables</li>
+      <li class="variables__item">Value: <span data-value>0</span></li>
+      <li class="variables__item">
+        Accumulator: <span data-accumulator>0</span>
+      </li>
+      <li class="variables__item">Result: <span data-result>0</span></li>
+      <li class="variables__item">
+        Operator: <span data-operation>null</span>
+      </li>
+    </ul>
     <div class="container">
       <div class="display" data-display></div>
       <div class="controls">
@@ -43,11 +54,13 @@
         </div>
         <div class="row">
           <button class="btn" data-number>0</button>
-          <button class="btn" data-float>.</button>
+          <button class="btn" data-number>.</button>
           <button class="btn" data-operator>=</button>
         </div>
       </div>
     </div>
+    <script defer src="/services/OperationsService.js"></script>
+    <script defer src="/services/CalculatorService.js"></script>
     <script defer src="/scripts/variables.js"></script>
     <script defer src="/scripts/utils.js"></script>
     <script defer src="/scripts/index.js"></script>
