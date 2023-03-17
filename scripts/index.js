@@ -1,71 +1,54 @@
-let displayValue = 0;
-let accumulator = 0;
-let isOperationActive = false;
-let applyOperation = true;
-let activeButtonOperation = null;
-let activeOperation = null;
-let result = 0;
-
-display.textContent = displayValue;
+const calculator = new CalculatorService(display);
+const specialOperators = ["C", "+/-", "%"];
 
 numbers.forEach((button) => {
   button.addEventListener("click", () => {
     const number = button.textContent;
-    const concatedNumber = concatNumber(number, displayValue);
+    const isPoint = number === ".";
+    const concatedNumber = concatNumber(number, calculator.getValue());
+    const value = Number(calculator.getDisplay()) + ".";
 
-    setValue(concatedNumber);
-    setDisplayValue(displayValue);
+    if (isPoint && calculator.getDisplay().includes(".")) {
+      return;
+    }
 
-    // if (activeOperation) {
-    //   applyOperation = false;
-    //   recursiveOperations(activeOperation);
-    //   activeOperation = null;
-    // } else {
-    //   applyOperation = true;
-    // }
-
-    globalLogs();
+    if (isPoint) {
+      calculator.setDisplayValue(value);
+      calculator.setValue(value);
+    } else {
+      calculator.setValue(concatedNumber);
+      calculator.setDisplayValue(calculator.getValue());
+    }
+    varValue.textContent = calculator.getValue();
   });
 });
 
 operators.forEach((button) => {
   button.addEventListener("click", () => {
     const operation = button.textContent;
-    setResult();
 
-    console.log("RESULT");
-
-    activeOperation = operation;
-    accumulator = result;
-
-    resetValue();
-
-    setDisplayValue(accumulator);
-
-    // recursiveOperations(operation);
-
-    // setDisplayValue(accumulator);
-    // resetValue();
-
-    globalLogs();
+    calculator.setResult();
+    varResult.textContent = calculator.getResult();
+    calculator.setOperation(operation);
+    varOperation.textContent = calculator.getOperation();
+    calculator.setResultToAccumulator();
+    varAccumulator.textContent = calculator.getAccumulator();
+    calculator.resetValue();
+    varValue.textContent = calculator.getValue();
+    if (!specialOperators.includes(operation)) {
+      calculator.setDisplayValue(calculator.getAccumulator());
+    } else {
+      if (operation === "+/-") {
+        calculator.setValue(+display.textContent * -1);
+        calculator.setDisplayValue(calculator.getValue());
+      } else if (operation === "%") {
+        calculator.setValue(+display.textContent / 100);
+        calculator.setDisplayValue(calculator.getValue());
+      } else if (operation === "C") {
+        calculator.setValue(0);
+        calculator.setDisplayValue(calculator.getValue());
+      }
+    }
+    varValue.textContent = calculator.getValue();
   });
 });
-
-function recursiveOperations(operation) {
-  switch (operation) {
-    case "=":
-      recursiveOperations(activeOperation);
-      activeOperation = null;
-      break;
-    case "+":
-      if (applyOperation) accumulator = sum(accumulator, displayValue);
-      activeOperation = operation;
-      break;
-    case "-":
-      if (applyOperation) accumulator = subtract(accumulator, displayValue);
-      activeOperation = operation;
-      break;
-  }
-
-  // console.log("O acumulador ficou com:", accumulator);
-}
