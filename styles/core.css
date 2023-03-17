@@ -1,0 +1,85 @@
+.container {
+  width: 500px;
+  height: 650px;
+
+  border: 1px solid;
+  border-radius: 8px;
+
+  background-color: #19191c;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.display {
+  flex: 1;
+
+  box-sizing: border-box;
+
+  margin: 8px;
+  border-radius: 4px;
+  border: 64px solid #2f2f33;
+
+  background-color: #aedb98;
+
+  font-family: "Orbitron", sans-serif;
+  font-size: 35pt;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  padding: 0 8px;
+
+  overflow: hidden;
+}
+
+.controls {
+  flex: 7;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 10px;
+  padding: 0 10px 10px 10px;
+}
+
+.row {
+  flex: 1;
+
+  display: flex;
+  flex-direction: row;
+
+  gap: 10px;
+}
+
+.btn {
+  flex: 1;
+
+  border: 1px solid #2f2f33;
+  border-radius: 4px;
+
+  background-color: #2f2f33;
+
+  font-family: "Orbitron", sans-serif;
+  font-size: 20pt;
+
+  color: #aedb98;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #aedb98;
+  color: #2f2f33;
+}
+
+.btn-active {
+  background-color: #aedb98;
+  color: #2f2f33;
+}
